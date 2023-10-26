@@ -28,7 +28,7 @@ class UpdateProjectRequest extends FormRequest
             "description" => ["required", "string"],
             "link" => ["required", "string"],
             "type_id" => ["nullable", "exists:types,id"],
-
+            "technologies" => ["nullable", "exists:technologies,id"],
         ];
     }
 }

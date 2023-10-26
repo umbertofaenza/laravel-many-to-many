@@ -45,6 +45,17 @@
                 <textarea id="description" name="description" class="form-control">{{ $project->description }}</textarea>
             </div>
 
+            <div class="col-12">
+                <div class="form-check text-center">
+                    <div>Technologies</div>
+                    @foreach ($technologies as $technology)
+                        <input type="checkbox" name="technologies[]" id="technology-{{ $technology->id }}"
+                            value="{{ $technology->id }}">
+                        <label for="technology-{{ $technology->id }}" class="me-3">{{ $technology->name }}</label>
+                    @endforeach
+                </div>
+            </div>
+
             <div class="col">
                 <button class="btn btn-success">Edit</button>
             </div>

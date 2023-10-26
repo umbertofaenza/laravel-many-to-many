@@ -26,6 +26,14 @@
                 <h4>Slug:</h4>
                 {{ $project->slug }}
             </div>
+            <div class="col-6">
+                <h4>Technologies:</h4>
+                @forelse($project->technologies as $technology)
+                    {{ $technology->name }}
+                @empty
+                    No technologies used.
+                @endforelse
+            </div>
             <div class="col-12">
                 <h4>Description:</h4>
                 {{ $project->description }}

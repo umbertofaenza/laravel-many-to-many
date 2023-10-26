@@ -6,8 +6,10 @@ use App\Models\Project;
 
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -33,7 +35,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view("admin.projects.create", compact("types"));
+        $technologies = Technology::all();
+        return view("admin.projects.create", compact("types", "technologies"));
     }
 
     /**
@@ -51,6 +54,9 @@ class ProjectController extends Controller
         $project->slug = Str::slug($project->name);
 
         $project->save();
+
+        if (Arr::exists($data, "technologies"))
+            $project->technologies()->attach($data["technologies"]);
 
         return redirect()->route('admin.projects.show', compact('project'));
     }

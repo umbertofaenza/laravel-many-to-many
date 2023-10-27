@@ -42,14 +42,17 @@
                         <td>{{ $project->created_at }}</td>
                         <td>{{ $project->updated_at }}</td>
                         <td>
+                            <div>
+                                <a href="{{ route('admin.projects.show', $project) }}">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </div>
 
-                            <a href="{{ route('admin.projects.show', $project) }}">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                            </a>
-
-                            <a href="{{ route('admin.projects.edit', $project) }}">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
+                            <div>
+                                <a href="{{ route('admin.projects.edit', $project) }}">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                            </div>
 
                             <div>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $project->id }}">
@@ -63,6 +66,7 @@
                 @endforelse
             </tbody>
         </table>
+        {{ $projects->links('pagination::bootstrap-5') }}
     </div>
 @endsection
 

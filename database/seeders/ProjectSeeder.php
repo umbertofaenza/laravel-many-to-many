@@ -22,7 +22,7 @@ class ProjectSeeder extends Seeder
         $types = Type::all()->pluck('id');
         $types[] = null;
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $type_id = $faker->randomElement($types);
 
             $project = new Project;

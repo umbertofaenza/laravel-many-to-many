@@ -16,12 +16,13 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Project</th>
-                    <th scope="col">Description</th>
+                    <th scope="col">Project name</th>
                     <th scope="col">Type</th>
                     <th scope="col">Technologies</th>
                     <th scope="col">Link</th>
                     <th scope="col">Slug</th>
+                    <th scope="col">Created at</th>
+                    <th scope="col">Updated at</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -30,7 +31,6 @@
                     <tr>
                         <th scope="row">{{ $project->id }}</th>
                         <td>{{ $project->name }}</td>
-                        <td>{{ $project->description }}</td>
                         <td>{{ $project->type?->name }}</td>
                         <td>
                             @foreach ($project->technologies as $technology)
@@ -39,7 +39,10 @@
                         </td>
                         <td>{{ $project->link }}</td>
                         <td>{{ $project->slug }}</td>
+                        <td>{{ $project->created_at }}</td>
+                        <td>{{ $project->updated_at }}</td>
                         <td>
+
                             <a href="{{ route('admin.projects.show', $project) }}">
                                 <i class="fa-solid fa-arrow-up-right-from-square"></i>
                             </a>
@@ -48,9 +51,11 @@
                                 <i class="fa-solid fa-pen"></i>
                             </a>
 
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $project->id }}">
-                                <i class="fa-solid fa-trash-can text-danger"></i>
-                            </a>
+                            <div>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $project->id }}">
+                                    <i class="fa-solid fa-trash-can text-danger"></i>
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 @empty

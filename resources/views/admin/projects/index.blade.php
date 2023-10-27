@@ -31,10 +31,13 @@
                     <tr>
                         <th scope="row">{{ $project->id }}</th>
                         <td>{{ $project->name }}</td>
-                        <td>{{ $project->type?->name }}</td>
+                        <td>
+                            <span class="badge text-dark bg-primary-subtle p-2">{{ $project->type?->name }}</span>
+                        </td>
                         <td>
                             @foreach ($project->technologies as $technology)
-                                {{ $technology->name }}
+                                <span
+                                    class="badge rounded-pill text-dark bg-success-subtle p-2">{{ $technology->name }}</span>
                             @endforeach
                         </td>
                         <td>{{ $project->link }}</td>

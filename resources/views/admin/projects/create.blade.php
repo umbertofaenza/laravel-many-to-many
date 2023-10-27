@@ -21,12 +21,12 @@
 
             <div class="col-6">
                 <label for="name">Project name</label>
-                <input type="text" id="name" name="name" class="form-control">
+                <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}">
             </div>
 
             <div class="col-6">
                 <label for="link">Link</label>
-                <input type="text" id="link" name="link" class="form-control">
+                <input type="text" id="link" name="link" class="form-control" value="{{ old('link') }}">
             </div>
 
             <div class="col-6">
@@ -34,14 +34,15 @@
                 <select name="type_id" id="type_id" class="form-select">
                     <option value="">No type</option>
                     @foreach ($types as $type)
-                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                        <option value="{{ $type->id }}" @if (old('type_id') == $type->id) selected @endif>
+                            {{ $type->name }}</option>
                     @endforeach
                 </select>
             </div>
 
             <div class="col-6">
                 <label for="description">Description</label>
-                <textarea id="description" name="description" class="form-control"></textarea>
+                <textarea id="description" name="description" class="form-control" value="{{ old('description') }}"></textarea>
             </div>
 
             <div class="col-12">
@@ -49,7 +50,7 @@
                     <div>Technologies</div>
                     @foreach ($technologies as $technology)
                         <input type="checkbox" name="technologies[]" id="technology-{{ $technology->id }}"
-                            value="{{ $technology->id }}">
+                            value="{{ $technology->id }}" @if (in_array($technology->id, old('technologies', $project_technologies ?? []))) checked @endif>
                         <label for="technology-{{ $technology->id }}" class="me-3">{{ $technology->name }}</label>
                     @endforeach
                 </div>

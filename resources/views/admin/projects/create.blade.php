@@ -16,7 +16,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.projects.store') }}" method="POST" class="row g-3 mb-3">
+        <form action="{{ route('admin.projects.store') }}" method="POST" class="row g-3 mb-3" enctype="multipart/form-data">
             @csrf
 
             <div class="col-6">
@@ -45,8 +45,8 @@
                 <textarea id="description" name="description" class="form-control" value="{{ old('description') }}"></textarea>
             </div>
 
-            <div class="col-12">
-                <div class="form-check text-center">
+            <div class="col-6">
+                <div class="form-check">
                     <div>Technologies</div>
                     @foreach ($technologies as $technology)
                         <input type="checkbox" name="technologies[]" id="technology-{{ $technology->id }}"
@@ -54,6 +54,11 @@
                         <label for="technology-{{ $technology->id }}" class="me-3">{{ $technology->name }}</label>
                     @endforeach
                 </div>
+            </div>
+
+            <div class="col-6">
+                <label for="image">Upload image</label>
+                <input type="file" name="image" id="image" class="form-control">
             </div>
 
             <div class="col-12">

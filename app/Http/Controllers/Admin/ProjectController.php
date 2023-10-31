@@ -10,6 +10,7 @@ use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -52,6 +53,11 @@ class ProjectController extends Controller
         $project = new Project();
         $project->fill($data);
         $project->slug = Str::slug($project->name);
+
+        if ($request->hasFile("image")) {
+            $image_path = Storage::put("uploads/projects/images", $data["image"]);
+            $project->image = $image_path;
+        }
 
         $project->save();
 
@@ -100,6 +106,17 @@ class ProjectController extends Controller
         $project->slug = Str::slug($data['name']);
         $project->update($data);
 
+        if ($request->hasFile('image')) {
+            if ($project->image) {
+                Storage::delete($project->image);
+            }
+
+            $image_path = Storage::put("uploads/projects/images", $data["image"]);
+            $project->image = $image_path;
+        }
+
+        $project->save();
+
         if (Arr::exists($data, "technologies"))
             $project->technologies()->sync($data["technologies"]);
 
@@ -114,6 +131,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->image) {
+            Storage::delete($project->image);
+        }
+
         $project->delete();
 
         return redirect()->route("admin.projects.index");

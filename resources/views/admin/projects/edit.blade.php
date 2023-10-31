@@ -48,8 +48,8 @@
                 <textarea id="description" name="description" class="form-control">{{ old('description', $project->description) }}</textarea>
             </div>
 
-            <div class="col-12">
-                <div class="form-check text-center">
+            <div class="col-6">
+                <div class="form-check">
                     <div>Technologies</div>
                     @foreach ($technologies as $technology)
                         <input type="checkbox" name="technologies[]" id="technology-{{ $technology->id }}"
@@ -57,6 +57,11 @@
                         <label for="technology-{{ $technology->id }}" class="me-3">{{ $technology->name }}</label>
                     @endforeach
                 </div>
+            </div>
+
+            <div class="col-6">
+                <label for="image">Upload image</label>
+                <input type="file" name="image" id="image" class="form-control">
             </div>
 
             <div class="col">

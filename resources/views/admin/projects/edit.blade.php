@@ -24,9 +24,7 @@
             <div class="col-6">
                 Image
                 @if ($project->image)
-                    {
                     <img src="{{ asset('/storage/' . $project->image) }}" alt="" class="img-fluid">
-                    }
                 @else
                     <div>
                         No image uploaded.

@@ -11,7 +11,13 @@
 
         <div class="row g-5">
             <div class="col-4">
-                <img src="{{ asset('/storage/' . $project->image) }}" class="img-fluid">
+                @if ($project->image)
+                    <img src="{{ asset('/storage/' . $project->image) }}" alt="" class="img-fluid">
+                @else
+                    <div>
+                        No image uploaded.
+                    </div>
+                @endif
             </div>
 
             <div class="col-8">

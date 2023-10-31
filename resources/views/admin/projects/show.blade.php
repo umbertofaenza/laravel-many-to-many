@@ -10,34 +10,47 @@
         <h1 class="mb-5">{{ $project->name }}</h1>
 
         <div class="row g-5">
-            <div class="col-6">
-                <h4>id:</h4>
-                {{ $project->id }}
+            <div class="col-4">
+                <img src="{{ asset('/storage/' . $project->image) }}" class="img-fluid">
             </div>
-            <div class="col-6">
-                <h4>Type:</h4>
-                {{ $project->type ? $project->type->name : 'No type.' }}
+
+            <div class="col-8">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <h4>id:</h4>
+                        {{ $project->id }}
+                    </div>
+                    <div class="col-6">
+                        <h4>Type:</h4>
+                        {{ $project->type ? $project->type->name : 'No type.' }}
+                    </div>
+                    <div class="col-6">
+                        <h4>Link:</h4>
+                        {{ $project->link }}
+                    </div>
+                    <div class="col-6">
+                        <h4>Slug:</h4>
+                        {{ $project->slug }}
+                    </div>
+                    <div class="col-6">
+                        <h4>Technologies:</h4>
+                        @forelse($project->technologies as $technology)
+                            {{ $technology->name }}
+                        @empty
+                            No technologies used.
+                        @endforelse
+                    </div>
+                    <div class="col-12">
+                        <h4>Description:</h4>
+                        {{ $project->description }}
+                    </div>
+                </div>
             </div>
-            <div class="col-6">
-                <h4>Link:</h4>
-                {{ $project->link }}
-            </div>
-            <div class="col-6">
-                <h4>Slug:</h4>
-                {{ $project->slug }}
-            </div>
-            <div class="col-6">
-                <h4>Technologies:</h4>
-                @forelse($project->technologies as $technology)
-                    {{ $technology->name }}
-                @empty
-                    No technologies used.
-                @endforelse
-            </div>
-            <div class="col-12">
-                <h4>Description:</h4>
-                {{ $project->description }}
-            </div>
+
+
+
+
+
         </div>
 
     </div>

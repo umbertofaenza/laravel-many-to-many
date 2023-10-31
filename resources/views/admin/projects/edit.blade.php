@@ -22,6 +22,20 @@
             @method('PUT')
 
             <div class="col-6">
+                Image
+                @if ($project->image)
+                    {
+                    <img src="{{ asset('/storage/' . $project->image) }}" alt="" class="img-fluid">
+                    }
+                @else
+                    <div>
+                        No image uploaded.
+                    </div>
+                @endif
+            </div>
+            <div class="col-6"></div>
+
+            <div class="col-6">
                 <label for="name">Project name</label>
                 <input type="text" id="name" name="name" class="form-control"
                     value="{{ old('name', $project->name) }}">
@@ -61,7 +75,7 @@
             </div>
 
             <div class="col-6">
-                <label for="image">Upload image</label>
+                <label for="image">Upload / Change image</label>
                 <input type="file" name="image" id="image" class="form-control">
             </div>
 

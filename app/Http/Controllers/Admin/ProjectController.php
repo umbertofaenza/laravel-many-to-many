@@ -139,4 +139,13 @@ class ProjectController extends Controller
 
         return redirect()->route("admin.projects.index");
     }
+
+    public function deleteImage(Project $project)
+    {
+        Storage::delete($project->image);
+        $project->image = null;
+        $project->save();
+
+        return redirect()->back();
+    }
 }

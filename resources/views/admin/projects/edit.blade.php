@@ -16,22 +16,38 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.projects.update', $project) }}" method="POST" class="row g-3 mb-3"
-            enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-
+        <div class="row">
             <div class="col-6">
                 Image
                 @if ($project->image)
-                    <img src="{{ asset('/storage/' . $project->image) }}" alt="" class="img-fluid">
+                    <div>
+                        <img src="{{ asset('/storage/' . $project->image) }}" alt="" class="img-fluid">
+                    </div>
+
+                    {{-- delete image form --}}
+                    @if ($project->image)
+                        <form method="POST" action="{{ route('admin.projects.delete-image', $project) }}"
+                            id="delete-image-form">
+                            @method('DELETE')
+                            @csrf
+
+                            <button class="btn btn-outline-danger mt-1 p-1" id="delete-image-btn">Remove image</button>
+                        </form>
+                    @endif
                 @else
                     <div>
                         No image uploaded.
                     </div>
                 @endif
             </div>
+
             <div class="col-6"></div>
+        </div>
+
+        <form action="{{ route('admin.projects.update', $project) }}" method="POST" class="row g-3 my-3"
+            enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
 
             <div class="col-6">
                 <label for="name">Project name</label>
@@ -84,4 +100,15 @@
 
         <a href="{{ route('admin.projects.index') }}" class="btn btn-outline-primary">Go back to list</a>
     </div>
+
+    @if ($project->image)
+        <script>
+            const deleteImageBtn = document.getElementById('delete-image-btn')
+            const deleteImageForm = document.getElementById('delete-image-form')
+
+            deleteImageBtn.addEventListener('click', function() {
+                deleteImageForm.submit()
+            })
+        </script>
+    @endif
 @endsection
